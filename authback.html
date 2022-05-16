@@ -1,0 +1,45 @@
+<html>
+    <head>授权页面
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        </head>
+        <body>
+            <script type="text/javascript">
+
+            function Request(strName){
+            var strHref = location.href;
+            var intPos = strHref.indexOf("?");
+            var strRight = strHref.substr(intPos + 1);
+            var arrTmp = strRight.split("&");
+            for(var i = 0; i < arrTmp.length; i++) {
+            var arrTemp = arrTmp[i].split("=");
+            if(arrTemp[0].toUpperCase() == strName.toUpperCase()) return arrTemp[1];
+            }
+            return "";
+            }
+            function shijian(oldtime){
+            //const oldtime = 1607222406
+            //正常以毫秒单位的话是13位数
+            //转换成毫秒单位
+            const date = new Date(oldtime * 1000);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            const second = date.getSeconds();
+            const ms = date.getMilliseconds();
+            const newtime = year + '/' + month + '/' + day + " " + hour + ":" + minute + ":" + second 
+            return newtime;
+
+            }
+
+            var tao_nick=Request("tao_nick");
+            var sid=Request("sid");
+            var auth_time=Request("auth_time");
+            var expire_time=Request("expire_time");
+            document.write ("淘宝用户名："+tao_nick+"</br>sid"+sid+"</br>授权时间："+shijian(auth_time)+"</br>到期时间："+shijian(expire_time));
+            alert("淘宝用户名："+tao_nick+"\nsid"+sid+"\n授权时间："+shijian(auth_time)+"\n到期时间："+shijian(expire_time));
+
+            </script>
+            </body>
+            </html>
